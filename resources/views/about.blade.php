@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-    <h1>About</h1>
-</body>
-
-</html>
+<x-Layout>
+    <x-slot:title>{{ $title }}</x-slot:title>
+    <h3 class="text-xl">Ini adalah halaman Homepage</h3>
+    <p>Nama: {{ $nama }}</p>
+</x-Layout>
