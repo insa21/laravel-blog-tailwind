@@ -1,5 +1,5 @@
 <?php
-
+// todo: N+1 (Eager Loading/Lazy load)-> agar query tidak boros saat di debuging
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -17,7 +17,9 @@ Route::get('/about', function () {
 
 
 Route::get('/posts', function () {
-    return view('posts', ['title' => 'Blog', 'posts' => Post::all()]);
+    //todo: N+1(Eager loading) $posts = Post::with(['author', 'category'])->latest()->get();
+    $posts = Post::latest()->get();
+    return view('posts', ['title' => 'Blog', 'posts' => $posts]);
 });
 
 
@@ -30,13 +32,13 @@ Route::get('/posts/{post:slug}', function (Post $post) {
 
 
 Route::get('/authors/{user:username}', function (User $user) {
-
+    //todo: N+1(Lazy load) $posts = $user->posts->load('category', 'author');
     return view('posts', ['title' => count($user->posts) . ' Articles by ' . $user->name, 'posts' => $user->posts]);
 });
 
 
 Route::get('/categories/{category:slug}', function (Category $category) {
-
+    //todo: N+1(Lazy load) $posts = $category->posts->load('category', 'author'); 
     return view('posts', ['title' => 'Articles in: ' . $category->name, 'posts' => $category->posts]);
 });
 
