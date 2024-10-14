@@ -38,7 +38,9 @@
         </div>
     </div>
 
-    <div class="py-4 px-4 mx-auto max-w-screen-xl lg:py-4 lg:px-0">
+    {{ $posts->links() }}
+
+    <div class="py-4 my-4 px-4 mx-auto max-w-screen-xl lg:py-4 lg:px-0">
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             @forelse ($posts as $post)
                 <article
@@ -56,7 +58,8 @@
                         <h2 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             {{ $post->title }}</h2>
                     </a>
-                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{{ Str::limit($post['body'], 200) }}</p>
+                    <p class="mb-5 font-light text-gray-500 dark:text-gray-400">{{ Str::limit($post['body'], 200) }}
+                    </p>
                     <div class="flex justify-between items-center">
                         <a href="/posts?authors={{ $post->author->username }}">
                             <div class="flex items-center space-x-3">
@@ -89,5 +92,7 @@
             @endforelse
         </div>
     </div>
+
+    {{ $posts->links() }}
 
 </x-Layout>
